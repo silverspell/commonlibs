@@ -49,3 +49,22 @@ func TestMapInPlace(t *testing.T) {
 		t.Fatalf("want %v got %v", want, arr)
 	}
 }
+
+func TestStringReverse(t *testing.T) {
+	in := "Hello World"
+	chars := []rune(in)
+	want := "dlroW olleH"
+	Reverse(&chars)
+	if string(chars) != want {
+		t.Fatalf("want %v got %v", want, string(chars))
+	}
+}
+
+func TestIntReverse(t *testing.T) {
+	in := []int{1, 2, 3, 4, 5}
+	want := []int{5, 4, 3, 2, 1}
+	Reverse(&in)
+	if !reflect.DeepEqual(in, want) {
+		t.Fatalf("want %v got %v", want, in)
+	}
+}

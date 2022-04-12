@@ -43,3 +43,11 @@ func Reduce[T, K any](input []T, initial K, f func(K, T) K) K {
 	}
 	return result
 }
+
+func Reverse[T any](input *[]T) {
+	x := *input
+	for i, j := 0, len(x)-1; i < j; i, j = i+1, j-1 {
+		x[i], x[j] = x[j], x[i]
+	}
+	*input = x
+}
