@@ -68,3 +68,44 @@ func TestIntReverse(t *testing.T) {
 		t.Fatalf("want %v got %v", want, in)
 	}
 }
+
+func TestAny(t *testing.T) {
+	in := []int{1, 2, 3, 4}
+
+	result := Any(&in, func(i int) bool {
+		return i < 3
+	})
+
+	if !result {
+		t.Fatalf("Some of them are below threshold")
+	}
+}
+
+func TestEvery(t *testing.T) {
+	in := []int{1, 2, 3, 4}
+
+	result := Every(&in, func(i int) bool {
+		return i < 9
+	})
+
+	if !result {
+		t.Fatalf("Some of them are below threshold")
+	}
+}
+
+func TestFind(t *testing.T) {
+	in := []int{1, 2, 3, 4}
+
+	ok, _ := Find(&in, func(item int) (bool, *int) {
+
+		if item == 3 {
+			return true, &item
+		}
+		return false, nil
+	})
+
+	if !ok {
+		t.Fatalf("punt")
+	}
+
+}

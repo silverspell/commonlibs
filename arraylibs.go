@@ -51,3 +51,31 @@ func Reverse[T any](input *[]T) {
 	}
 	*input = x
 }
+
+func Any[T any](input *[]T, f func(T) bool) bool {
+	for _, v := range *input {
+		if f(v) {
+			return true
+		}
+	}
+	return false
+}
+
+func Every[T any](input *[]T, f func(T) bool) bool {
+	for _, v := range *input {
+		if !f(v) {
+			return false
+		}
+	}
+	return true
+}
+
+func Find[T any](input *[]T, f func(T) (bool, *T)) (bool, *T) {
+	for _, v := range *input {
+
+		if ok, val := f(v); ok {
+			return true, val
+		}
+	}
+	return false, nil
+}
